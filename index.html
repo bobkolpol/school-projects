@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Портал проектов | ГБОУ «РЦШО «Завидово»</title>
+    <link href="https://cdn.jsdelivr.net/npm/@fontsource/inter@5.0.16/400,600,700,800.css" rel="stylesheet">
+    <style>
+        :root { --bg:#f8fafc; --primary:#1d4ed8; --card:#fff; --text:#0f172a; --muted:#64748b; --border:#e2e8f0; --radius:14px; --shadow:0 2px 8px rgba(0,0,0,0.05); }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body { font-family:'Inter',system-ui,sans-serif; background:var(--bg); color:var(--text); line-height:1.5; padding:0 0 4rem; }
+        header { background:var(--primary); color:#fff; padding:3rem 1.5rem; text-align:center; border-radius:0 0 32px 32px; margin-bottom:2.5rem; }
+        header h1 { font-size:2rem; font-weight:800; margin-bottom:0.4rem; } header p { opacity:0.9; }
+        .container { max-width:1000px; margin:0 auto; padding:0 1.2rem; }
+        .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:1.2rem; }
+        .card { background:var(--card); padding:1.5rem; border-radius:var(--radius); box-shadow:var(--shadow); text-align:center; text-decoration:none; color:inherit; border:1px solid var(--border); transition:transform 0.2s, box-shadow 0.2s; }
+        .card:hover { transform:translateY(-4px); box-shadow:0 8px 20px rgba(0,0,0,0.1); }
+        .card .icon { font-size:2.5rem; margin-bottom:0.8rem; display:block; }
+        .card .name { font-weight:700; font-size:1.1rem; }
+        @media(max-width:600px){ .grid{grid-template-columns:1fr 1fr;} header h1{font-size:1.6rem;} }
+    </style>
+</head>
+<body>
+<header>
+    <h1>📚 Портал ученических проектов</h1>
+    <p>Выберите предмет для просмотра работ</p>
+</header>
+<div class="container">
+    <div class="grid">
+        <a href="informatics.html" class="card"><span class="icon">💻</span><span class="name">Информатика</span></a>
+        <a href="biology.html" class="card"><span class="icon">🌿</span><span class="name">Биология</span></a>
+        <a href="russian.html" class="card"><span class="icon">📝</span><span class="name">Русский язык</span></a>
+        <a href="literature.html" class="card"><span class="icon">📖</span><span class="name">Литература</span></a>
+        <a href="chemistry.html" class="card"><span class="icon">🧪</span><span class="name">Химия</span></a>
+        <a href="history.html" class="card"><span class="icon">🏛️</span><span class="name">История</span></a>
+        <a href="social.html" class="card"><span class="icon">⚖️</span><span class="name">Обществознание</span></a>
+        <a href="english.html" class="card"><span class="icon">🇬🇧</span><span class="name">Английский язык</span></a>
+    </div>
+</div>
+</body>
+</html>

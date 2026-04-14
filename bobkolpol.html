@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Выбор предмета</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/inter@5.0.16/400,600,700,800.css">
+    <style>
+        :root {
+            --bg-gradient-1: #ffecd2;
+            --bg-gradient-2: #fcb69f;
+            --bg-gradient-3: #a1c4fd;
+            --card-bg: #ffffff;
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --radius-lg: 20px;
+            --radius-md: 14px;
+            --shadow-sm: 0 4px 12px rgba(0,0,0,0.05);
+            --shadow-hover: 0 12px 28px rgba(0,0,0,0.12);
+            --shadow-selected: 0 8px 24px rgba(0,0,0,0.25);
+            --transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            min-height: 100vh;
+            background: linear-gradient(-45deg, var(--bg-gradient-1), var(--bg-gradient-2), var(--bg-gradient-3), #e2e8f0);
+            background-size: 400% 400%;
+            animation: bgShift 15s ease infinite;
+            color: var(--text-primary);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 3rem 1.5rem 4rem;
+            overflow-x: hidden;
+        }
+
+        @keyframes bgShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+            animation: fadeUp 0.8s ease-out;
+        }
+        h1 {
+            font-size: 2.4rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+            margin-bottom: 0.4rem;
+            background: linear-gradient(135deg, #1e293b, #334155);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .subtitle {
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+            letter-spacing: 0.2px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 1.2rem;
+            width: 100%;
+            max-width: 880px;
+            margin-bottom: 2rem;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 2px solid transparent;
+            border-radius: var(--radius-lg);
+            padding: 1.8rem 1rem 1.4rem;
+            text-align: center;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: var(--transition);
+            box-shadow: var(--shadow-sm);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 130px;
+            user-select: none;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 5px;
+            background: var(--accent-color);
+            transition: height 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-hover);
+            border-color: rgba(0,0,0,0.05);
+        }
+        .card:hover::before { height: 8px; }
+
+        .card .icon {
+            font-size: 2.6rem;
+            margin-bottom: 0.8rem;
+            transition: transform 0.3s ease;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+        }
+        .card:hover .icon { transform: scale(1.15); }
+
+        .card .name {
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: var(--text-primary);
+            transition: color 0.3s;
+        }
+
+        /* Состояние выбора */
+        .card.selected {
+            background: var(--accent-color);
+            color: #fff;
+            border-color: transparent;
+            box-shadow: var(--shadow-selected);
+            transform: translateY(-8px) scale(1.02);
+        }
+        .card.selected::before { height: 0; background: rgba(255,255,255,0.3); }
+        .card.selected .name { color: #fff; }
+        .card.selected .icon { filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2)); transform: scale(1.1); }
+
+        .check-badge {
+            position: absolute;
+            top: 12px; right: 12px;
+            width: 26px; height: 26px;
+            background: #fff;
+            color: var(--accent-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 0.9rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            opacity: 0;
+            transform: scale(0) rotate(-90deg);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .card.selected .check-badge {
+            opacity: 1;
+            transform: scale(1) rotate(0deg);
+        }
+
+        .action-panel {
+            background: rgba(255,255,255,0.85);
+            backdrop-filter: blur(12px);
+            padding: 1.2rem 1.8rem;
+            border-radius: 40px;
+            box-shadow: var(--shadow-hover);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            opacity: 0;
+            transform: translateY(20px) scale(0.95);
+            transition: var(--transition);
+            pointer-events: none;
+            max-width: 90vw;
+        }
+        .action-panel.visible {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            pointer-events: auto;
+            margin-top: 1rem;
+        }
+
+        .selected-tag {
+            font-weight: 700;
+            font-size: 0.95rem;
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            background: var(--accent-color, #e2e8f0);
+            color: #fff;
+            white-space: nowrap;
+        }
+
+        .btn-go {
+            background: #1e293b;
+            color: #fff;
+            border: none;
+            padding: 0.8rem 1.6rem;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            white-space: nowrap;
+        }
+        .btn-go:hover { background: #0f172a; transform: scale(1.05); }
+        .btn-go:active { transform: scale(0.95); }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 600px) {
+            .grid { grid-template-columns: repeat(2, 1fr); gap: 0.9rem; }
+            h1 { font-size: 1.9rem; }
+            .card { padding: 1.4rem 0.6rem 1rem; min-height: 110px; }
+            .card .icon { font-size: 2.2rem; margin-bottom: 0.5rem; }
+            .action-panel { flex-direction: column; text-align: center; border-radius: var(--radius-md); padding: 1rem; width: 100%; }
+            .btn-go { width: 100%; justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Портал ученических проектов</h1>
+        <div class="subtitle">Выберите учебный предмет для просмотра работ</div>
+    </header>
+
+    <main class="grid" id="subjects-grid"></main>
+
+    <div class="action-panel" id="action-panel">
+        <span class="selected-tag" id="selected-tag">Предмет не выбран</span>
+        <button class="btn-go" id="btn-go" type="button">Открыть проекты →</button>
+    </div>
+
+    <script>
+        (function() {
+            const subjectsConfig = [
+                { name: 'Английский язык', icon: '🇬🇧', color: '#EF476F' },
+                { name: 'Русский язык', icon: '📝', color: '#06D6A0' },
+                { name: 'Литература', icon: '📖', color: '#FFD166' },
+                { name: 'Обществознание', icon: '⚖️', color: '#118AB2' },
+                { name: 'Биология', icon: '🌿', color: '#073B4C' },
+                { name: 'Химия', icon: '🧪', color: '#9D4EDD' },
+                { name: 'Физика', icon: '⚛️', color: '#3A86FF' },
+                { name: 'Технологии', icon: '🛠️', color: '#FF8A00' }
+            ];
+
+            let activeSubject = null;
+            const grid = document.getElementById('subjects-grid');
+            const panel = document.getElementById('action-panel');
+            const tag = document.getElementById('selected-tag');
+            const btn = document.getElementById('btn-go');
+
+            function renderCards() {
+                grid.innerHTML = '';
+                subjectsConfig.forEach((sub, index) => {
+                    const card = document.createElement('div');
+                    card.className = 'card';
+                    card.style.setProperty('--accent-color', sub.color);
+                    card.innerHTML = `
+                        <span class="icon">${sub.icon}</span>
+                        <span class="name">${sub.name}</span>
+                        <div class="check-badge">✓</div>
+                    `;
+                    card.addEventListener('click', () => selectSubject(sub, card));
+                    grid.appendChild(card);
+                });
+            }
+
+            function selectSubject(sub, cardElement) {
+                // Сброс предыдущего выбора
+                document.querySelectorAll('.card.selected').forEach(c => {
+                    c.classList.remove('selected');
+                    c.style.setProperty('--accent-color', c.querySelector('.check-badge').getComputedStyle?.('--accent-color') || '#ccc');
+                });
+                
+                // Активация нового
+                cardElement.classList.add('selected');
+                activeSubject = sub;
+                tag.textContent = `Выбрано: ${sub.name}`;
+                tag.style.backgroundColor = sub.color;
+                panel.classList.add('visible');
+
+                // Небольшая анимация для панели
+                panel.style.transform = 'translateY(0) scale(1)';
+            }
+
+            btn.addEventListener('click', () => {
+                if (!activeSubject) return;
+                // Здесь будет переход: window.location.href = `projects.html?subject=${encodeURIComponent(activeSubject.name)}`;
+                const originalText = btn.textContent;
+                btn.textContent = 'Загрузка...';
+                btn.style.opacity = '0.7';
+                setTimeout(() => {
+                    alert(`✅ Переход к странице проектов: "${activeSubject.name}"`);
+                    btn.textContent = originalText;
+                    btn.style.opacity = '1';
+                }, 400);
+            });
+
+            // Инициализация
+            renderCards();
+        })();
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Английский язык | Итоговые проекты</title>
+    <link href="https://cdn.jsdelivr.net/npm/@fontsource/inter@5.0.16/400,600,700,800.css" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #f0f9ff;
+            --card: #ffffff;
+            --primary: #1e3a8a; /* Deep Royal Blue */
+            --primary-dark: #172554;
+            --text-main: #0f172a;
+            --text-sec: #64748b;
+            --border: #e2e8f0;
+            --radius: 14px;
+            --shadow: 0 2px 8px rgba(0,0,0,0.04);
+            --shadow-hover: 0 6px 16px rgba(30, 58, 138, 0.1);
+            --star-glow: 0 0 20px rgba(234, 179, 8, 0.4);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: var(--bg);
+            color: var(--text-main);
+            line-height: 1.5;
+            padding: 0 0 4rem;
+        }
+        header {
+            background: var(--primary);
+            color: #fff;
+            padding: 2.5rem 1.5rem;
+            text-align: center;
+            border-radius: 0 0 28px 28px;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 16px rgba(30, 58, 138, 0.2);
+        }
+        header h1 { font-size: 1.8rem; font-weight: 800; margin-bottom: 0.3rem; }
+        header p { opacity: 0.9; font-size: 0.95rem; }
+        
+        .container { max-width: 1000px; margin: 0 auto; padding: 0 1.2rem; }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.2rem;
+        }
+
+        .card {
+            background: var(--card);
+            border-radius: var(--radius);
+            padding: 1.4rem;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+        .card:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); }
+        
+        .card.featured { border: 2px solid #eab308; box-shadow: var(--shadow), var(--star-glow); }
+
+        .star-badge {
+            position: absolute; top: 1rem; right: 1rem;
+            background: linear-gradient(135deg, #eab308, #f59e0b); color: #000;
+            padding: 0.25rem 0.6rem; border-radius: 20px;
+            font-size: 0.65rem; font-weight: 800;
+            display: flex; align-items: center; gap: 4px;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+
+        .avatar {
+            width: 44px; height: 44px; border-radius: 50%;
+            background: #dbeafe; color: var(--primary);
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 700; font-size: 1rem; margin-bottom: 0.8rem;
+        }
+        .badge {
+            font-size: 0.65rem; font-weight: 700; padding: 0.2rem 0.5rem;
+            border-radius: 12px; background: #eff6ff; color: var(--primary);
+            text-transform: uppercase; letter-spacing: 0.3px;
+        }
+
+        .proj-title { font-size: 1.05rem; font-weight: 700; margin-bottom: 0.2rem; margin-top: 0.5rem; }
+        .student-name { color: var(--text-sec); font-size: 0.85rem; margin-bottom: 1rem; }
+
+        .files-title { font-size: 0.65rem; font-weight: 600; color: var(--text-sec); margin-bottom: 0.5rem; text-transform: uppercase; }
+        .files-list { display: flex; flex-direction: column; gap: 0.4rem; margin-top: auto; }
+        
+        .file-row {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 0.5rem 0.6rem; background: #f8fafc; border-radius: 6px;
+            border: 1px solid #e2e8f0; font-size: 0.8rem; transition: background 0.2s;
+        }
+        .file-row:hover { background: #f1f5f9; }
+        .f-info { display: flex; align-items: center; gap: 0.5rem; overflow: hidden; }
+        .f-icon { font-size: 1rem; }
+        .f-name { font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        
+        .dl-btn {
+            background: var(--primary); color: #fff; border: none;
+            padding: 0.3rem 0.6rem; border-radius: 5px; font-size: 0.7rem;
+            font-weight: 600; cursor: pointer; text-decoration: none; white-space: nowrap; transition: background 0.2s;
+        }
+        .dl-btn:hover { background: var(--primary-dark); }
+
+        @media (max-width: 600px) {
+            header h1 { font-size: 1.5rem; }
+            .grid { grid-template-columns: 1fr; }
+            .container { padding: 0 0.8rem; }
+        }
+    </style>
+</head>
+<body>
+<div style="max-width:1000px; margin:0 auto; padding:0 1.2rem;">
+    <a href="index.html" style="display:inline-flex; align-items:center; gap:6px; color:#1d4ed8; font-weight:600; text-decoration:none; padding:8px 0;">← Назад к предметам</a>
+</div>
+<header>
+    <h1>🇬🇧 Английский язык</h1>
+    <p>Итоговые проекты учеников 9 класса • 2026 г.</p>
+</header>
+
+<div class="container">
+    <div class="grid">
+        
+        <!-- 1 ⭐ -->
+        <div class="card featured">
+            <div class="star-badge">⭐ ЛУЧШИЙ</div>
+            <div class="avatar">МБ</div>
+            <span class="badge">Culture</span>
+            <div class="proj-title">The British Monarchy: History and Modernity</div>
+            <div class="student-name">Белов Михаил Вячеславович</div>
+            <div class="files-title">Файлы проекта</div>
+            <div class="files-list">
+                <div class="file-row"><div class="f-info"><span class="f-icon">📕</span><span class="f-name">Presentation.pptx</span></div><a href="#" class="dl-btn">⬇ Download</a></div>
+                <div class="file-row"><div class="f-info"><span class="f-icon">📘</span><span class="f-name">Essay.docx</span></div><a href="#" class="dl-btn">⬇ Download</a></div>
+                <div class="file-row"><div class="f-info"><span class="f-icon">📄</span><span class="f-name">References.pdf</span></div><a href="#" class="dl-btn">⬇ Download</a></div>
+            </div>
+        </div>
+
+        <!-- 2 -->
+        <div class="card">
+            <div class="avatar" style="background:#fce7f3; color:#be185d;">ЕИ</div>
+            <span class="badge" style="background:#fdf2f8; color:#be185d;">Grammar</span>
+            <div class="proj-title">Irregular Verbs: Learning Through Songs</div>
+            <div class="student-name">Иванова Елена Сергеевна</div>
+            <div class="files-title">Файлы проекта</div>
+            <div class="files-list">
+                <div class="file-row"><div class="f-info"><span class="f-icon">📕</span><span class="f-name">Lesson_Plan.pptx</span></div><a href="#" class="dl-btn">⬇ Download</a></div>
+                <div class="file-row"><div class="f-info"><span class="f-icon">🎵</span><span class="f-name">Songs_List.mp3</span></div><a href="#" class="dl-btn">⬇ Download</a></div>
+            </div>
+        </div>
+
+        <!-- 3 ⭐ -->
+        <div class="card featured">
+            <div class="star-badge">⭐ ЛУЧШИЙ</div>
+            <div class="avatar" style="background:#e0f2fe; color:#0284c7;">СП</div>
+            <span class="badge" style="background:#f0f9ff; color:#0284c7;">Tourism</span>
+            <div class="proj-title">London Landmarks: A Virtual Guide for Teens</div>
+            <div class="student-name">Петров Сергей Андреевич</div>
+            <div class="files-title">Файлы проекта</div>
+            <div class="files-list">
+                <div class="file-row"><div class="f-info"><span class="f-icon">📕</span><span class="f-name">Guidebook.pptx</span></div><a href="#" class="dl-btn">⬇ Download</a></div>
+                <div class="file-row"><div class="f-info"><span class="f-icon">🎬</span><span class="f-name">Video_Tour.mp4</span></div><a href="#" class="dl-btn">⬇ Download</a></div>
+                <div class="file-row"><div class="f-info"><span class="f-icon">📘</span><span class="f-name">Vocabulary_List.docx</span></div><a href="#" class="dl-btn">⬇ Download</a></div>
+            </div>
+        </div>
+
+        <!-- 4 -->
+        <div class="card">
+            <div class="avatar" style="background:#fef3c7; color:#b45309;">МК</div>
+            <span class="badge" style="background:#fffbeb; color:#b45309;">Slang</span>
+            <div class="proj-title">Teen Slang vs Formal English: When to Use Which?</div>
+            <div class="student-name">Козлова Мария Владимировна</div>
+            <div class="files-title">Файлы проекта</div>
+            <div class="files-list">
+                <div class="file-row"><div class="f-info"><span class="f-icon">📕</span><span class="f-name">Research.pptx</span></div><a href="#" class="dl-btn">⬇ Download</a></div>
+                <div class="file-row"><div class="f-info"><span class="f-icon">📘</span><span class="f-name">Glossary.docx</span></div><a href="#" class="dl-btn">⬇ Download</a></div>
+            </div>
+        </div>
+
+        <!-- 5 -->
+        <div class="card">
+            <div class="avatar" style="background:#f3e8ff; color:#7e22ce;">АС</div>
+            <span class="badge" style="background:#faf5ff; color:#7e22ce;">Sociology</span>
+            <div class="proj-title">Hobbies of Russian vs British Teens: A Survey</div>
+            <div class="student-name">Сидоров Артём Игоревич</div>
+            <div class="files-title">Файлы проекта</div>
+            <div class="files-list">
+                <div class="file-row"><div class="f-info"><span class="f-icon">📕</span><span class="f-name">Results.pptx</span></div><a href="#" class="dl-btn">⬇ Download</a></div>
+                <div class="file-row"><div class="f-info"><span class="f-icon">📊</span><span class="f-name">Charts_Stats.xlsx</span></div><a href="#" class="dl-btn">⬇ Download</a></div>
+            </div>
+        </div>
+
+        <!-- 6 ⭐ -->
+        <div class="card featured">
+            <div class="star-badge">⭐ ЛУЧШИЙ</div>
+            <div class="avatar" style="background:#dcfce7; color:#15803d;">ВМ</div>
+            <span class="badge" style="background:#f0fdf4; color:#15803d;">Literature</span>
+            <div class="proj-title">Shakespeare's Sonnets: Love and Time</div>
+            <div class="student-name">Волкова Мария Дмитриевна</div>
+            <div class="files-title">Файлы проекта</div>
+            <div class="files-list">
+                <div class="file-row"><div class="f-info"><span class="f-icon">📕</span><span class="f-name">Analysis.pptx</span></div><a href="#" class="dl-btn">⬇ Download</a></div>
+                <div class="file-row"><div class="f-info"><span class="f-icon">📘</span><span class="f-name">Translation_Essay.docx</span></div><a href="#" class="dl-btn">⬇ Download</a></div>
+            </div>
+        </div>
+
+        <!-- 7 -->
+        <div class="card">
+            <div class="avatar" style="background:#fee2e2; color:#dc2626;">ИЛ</div>
+            <span class="badge" style="background:#fef2f2; color:#dc2626;">IT English</span>
+            <div class="proj-title">Why IT Specialists Must Know English</div>
+            <div class="student-name">Лебедев Иван Петрович</div>
+            <div class="files-title">Файлы проекта</div>
+            <div class="files-list">
+                <div class="file-row"><div class="f-info"><span class="f-icon">📕</span><span class="f-name">Career_Guide.pptx</span></div><a href="#" class="dl-btn">⬇ Download</a></div>
+                <div class="file-row"><div class="f-info"><span class="f-icon">📘</span><span class="f-name">Interview_Tips.pdf</span></div><a href="#" class="dl-btn">⬇ Download</a></div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>
+

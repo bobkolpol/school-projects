@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Информатика | Итоговые проекты</title>
+    <link href="https://cdn.jsdelivr.net/npm/@fontsource/inter@5.0.16/400,600,700,800.css" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #f8fafc;
+            --card: #ffffff;
+            --primary: #1d4ed8;
+            --primary-dark: #1e3a8a;
+            --text-main: #0f172a;
+            --text-sec: #64748b;
+            --border: #e2e8f0;
+            --radius: 16px;
+            --shadow: 0 4px 12px rgba(0,0,0,0.06);
+            --shadow-hover: 0 8px 20px rgba(0,0,0,0.1);
+            --star-glow: 0 0 20px rgba(234, 179, 8, 0.4);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: var(--bg);
+            color: var(--text-main);
+            line-height: 1.5;
+            padding: 0 0 4rem;
+        }
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 3rem 1.5rem;
+            text-align: center;
+            border-radius: 0 0 32px 32px;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 4px 16px rgba(29, 78, 216, 0.15);
+        }
+        header h1 { font-size: 2rem; font-weight: 800; margin-bottom: 0.4rem; letter-spacing: -0.5px; }
+        header p { opacity: 0.9; font-size: 1rem; font-weight: 400; }
+        
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .card {
+            background: var(--card);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+        .card:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); }
+        
+        .card.featured {
+            border: 2px solid #eab308;
+            box-shadow: var(--shadow), var(--star-glow);
+        }
+        .card.featured::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #eab308, #f59e0b, #eab308);
+            border-radius: 16px 16px 0 0;
+        }
+
+        .card-top {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+        .avatar {
+            width: 48px; height: 48px; border-radius: 50%;
+            background: #e0e7ff; color: var(--primary);
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 700; font-size: 1.1rem; margin-bottom: 0.8rem;
+        }
+        .badge {
+            font-size: 0.7rem; font-weight: 700; padding: 0.25rem 0.6rem;
+            border-radius: 20px; background: #eff6ff; color: var(--primary);
+            text-transform: uppercase; letter-spacing: 0.5px; white-space: nowrap;
+        }
+        
+        .star-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: linear-gradient(135deg, #eab308, #f59e0b);
+            color: #000;
+            padding: 0.3rem 0.7rem;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            box-shadow: 0 2px 8px rgba(234, 179, 8, 0.4);
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .proj-title { font-size: 1.15rem; font-weight: 700; margin-bottom: 0.3rem; }
+        .student-name { color: var(--text-sec); font-size: 0.9rem; margin-bottom: 1.2rem; font-weight: 500; }
+
+        .files-title {
+            font-size: 0.7rem; font-weight: 600; color: var(--text-sec);
+            margin-bottom: 0.6rem; text-transform: uppercase; letter-spacing: 0.5px;
+        }
+        .files-list { display: flex; flex-direction: column; gap: 0.5rem; margin-top: auto; }
+        
+        .file-row {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 0.6rem; background: #f8fafc; border-radius: 8px;
+            border: 1px solid #e2e8f0; transition: background 0.2s;
+        }
+        .file-row:hover { background: #f1f5f9; }
+        
+        .f-info { display: flex; align-items: center; gap: 0.6rem; overflow: hidden; }
+        .f-icon { font-size: 1.1rem; flex-shrink: 0; }
+        .f-name { font-size: 0.8rem; font-weight: 600; color: var(--text-main); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        
+        .dl-btn {
+            background: var(--primary); color: white; border: none;
+            padding: 0.35rem 0.7rem; border-radius: 6px; font-size: 0.75rem;
+            font-weight: 600; cursor: pointer; text-decoration: none;
+            transition: background 0.2s; white-space: nowrap;
+        }
+        .dl-btn:hover { background: var(--primary-dark); }
+
+        @media (max-width: 640px) {
+            header h1 { font-size: 1.6rem; }
+            .grid { grid-template-columns: 1fr; }
+            .container { padding: 0 1rem; }
+        }
+    </style>
+</head>
+<body>
+<div style="max-width:1000px; margin:0 auto; padding:0 1.2rem;">
+    <a href="index.html" style="display:inline-flex; align-items:center; gap:6px; color:#1d4ed8; font-weight:600; text-decoration:none; padding:8px 0;">← Назад к предметам</a>
+</div>
+<header>
+    <h1>Информатика</h1>
+    <p>Итоговые проекты учеников 9 класса • 2026 г.</p>
+</header>
+
+<div class="container">
+    <div class="grid">
+        
+        <!-- 1 ⭐ FEATURED -->
+        <div class="card featured">
+            <div class="star-badge">⭐ ЛУЧШИЙ</div>
+            <div class="card-top">
+                <div>
+                    <div class="avatar">МБ</div>
+                    <span class="badge">3D-моделирование</span>
+                </div>
+            </div>
+            <div class="proj-title">Ограничитель оконной створки</div>
+            <div class="student-name">Белов Михаил Вячеславович</div>
+            <div class="files-title">Файлы проекта</div>
+            <div class="files-list">
+                <div class="file-row"><div class="f-info"><span class="f-icon">📕</span><span class="f-name">Презентация.pptx</span></div><a href="#" class="dl-btn">⬇ Скачать</a></div>
+                <div class="file-row"><div class="f-info"><span class="f-icon">📘</span><span class="f-name">Пояснительная.docx</span></div><a href="#" class="dl-btn">⬇ Скачать</a></div>
+                <div class="file-row"><div class="f-info"><span class="f-icon">🧊</span><span class="f-name">3D_Модель.stl</span></div><a href="#" class="dl-btn">⬇ Скачать</a></div>
+            </div>
+        </div>
+
+        <!-- 2 -->
+        <div class="card">
+            <div class="card-top">
+                <div>
+                    <div class="avatar" style="background:#fce7f3; color:#be185d;">АТ</div>
+                    <span class="badge" style="background:#fdf2f8; color:#be185d;">Python</span>
+                </div>
+            </div>
+            <div class="proj-title">Парсер погодных данных</div>
+            <div class="student-name">Тайлер Артём Сергеевич</div>
+            <div class="files-title">Файлы проекта</div>
+            <div class="files-list">
+                <div class="file-row"><div class="f-info"><span class="f-icon">📕</span><span class="f-name">Демонстрация.pptx</span></div><a href="#" class="dl-btn">⬇ Скачать</a></div>
+                <div class="file-row"><div class="f-info"><span class="f-icon">🐍</span><span class="f-name">parser_main.py</span></div><a href="#" class="dl-btn">⬇ Скачать</a></div>
+                <div class="file-row"><div class="f-info"><span class="f-icon">📊</span><span class="f-name">Отчет_тестов.xlsx</span></div><a href="#" class="dl-btn">⬇ Скачать</a></div>
+            </div>
+        </div>
+
+        <!-- 3 ⭐ FEATURED -->
+        <div class="card featured">
+            <div class="star-badge">⭐ ЛУЧШИЙ</div>
+            <div class="card-top">
+                <div>
+                    <div class="avatar" style="background:#dcfce7; color:#15803d;">КП</div>
+                    <span class="badge" style="background:#f0fdf4; color:#15803d;">Веб-дизайн</span>
+                </div>
+            </div>
+            <div class="proj-title">Портфолио школьного кружка</div>
+            <div class="student-name">Павлов Кирилл Андреевич</div>
+            <div class="files-title">Файлы проекта</div>
+            <div class="files-list">
+                <div class="file-row"><div class="f-info"><span class="f-icon">📕</span><span class="f-name">Проект_сайт.pptx</span></div><a href="#" class="dl-btn">⬇ Скачать</a></div>
+                <div class="file-row"><div class="f-info"><span class="f-icon">📦</span><span class="f-name">site_archive.zip</span></div><a href="#" class="dl-btn">⬇ Скачать</a></div>
+                <div class="file-row"><div class="f-info"><span class="f-icon">📘</span><span class="f-name">Руководство.docx</span></div><a href="#" class="dl-btn">⬇ Скачать</a></div>
+            </div>
+        </div>
+
+        <!-- 4 -->
+        <div class="card">
+            <div class="card-top">
+                <div>
+                    <div class="avatar" style="background:#e0f2fe; color:#0284c7;">АС</div>
+                    <span class="badge" style="background:#f0f9ff; color:#0284c7;">Презентации</span>
+                </div>
+            </div>
+            <div class="proj-title">ИИ в современном образовании</div>
+            <div class="student-name">Смирнова Анна Ивановна</div>
+            <div class="files-title">Файлы проекта</div>
+            <div class="files-list">
+                <div class="file-row"><div class="f-info"><span class="f-icon">📕</span><span class="f-name">Презентация.pptx</span></div><a href="#" class="dl-btn">⬇ Скачать</a></div>
+                <div class="file-row"><div class="f-info"><span class="f-icon">📄</span><span class="f-name">Источники.pdf</span></div><a href="#" class="dl-btn">⬇ Скачать</a></div>
+            </div>
+        </div>
+
+        <!-- 5 -->
+        <div class="card">
+            <div class="card-top">
+                <div>
+                    <div class="avatar" style="background:#fef3c7; color:#b45309;">ДК</div>
+                    <span class="badge" style="background:#fffbeb; color:#b45309;">JavaScript</span>
+                </div>
+            </div>
+            <div class="proj-title">Браузерная игра «Змейка»</div>
+            <div class="student-name">Кузнецов Денис Олегович</div>
+            <div class="files-title">Файлы проекта</div>
+            <div class="files-list">
+                <div class="file-row"><div class="f-info"><span class="f-icon">🎮</span><span class="f-name">game_demo.mp4</span></div><a href="#" class="dl-btn">⬇ Скачать</a></div>
+                <div class="file-row"><div class="f-info"><span class="f-icon">📦</span><span class="f-name">snake_game.zip</span></div><a href="#" class="dl-btn">⬇ Скачать</a></div>
+                <div class="file-row"><div class="f-info"><span class="f-icon">📘</span><span class="f-name">Документация.docx</span></div><a href="#" class="dl-btn">⬇ Скачать</a></div>
+            </div>
+        </div>
+
+        <!-- 6 ⭐ FEATURED -->
+        <div class="card featured">
+            <div class="star-badge">⭐ ЛУЧШИЙ</div>
+            <div class="card-top">
+                <div>
+                    <div class="avatar" style="background:#f3e8ff; color:#7e22ce;">МВ</div>
+                    <span class="badge" style="background:#faf5ff; color:#7e22ce;">Базы данных</span>
+                </div>
+            </div>
+            <div class="proj-title">База данных школьной библиотеки</div>
+            <div class="student-name">Волкова Мария Дмитриевна</div>
+            <div class="files-title">Файлы проекта</div>
+            <div class="files-list">
+                <div class="file-row"><div class="f-info"><span class="f-icon">📕</span><span class="f-name">Защита.pptx</span></div><a href="#" class="dl-btn">⬇ Скачать</a></div>
+                <div class="file-row"><div class="f-info"><span class="f-icon">🗃️</span><span class="f-name">library_db.sql</span></div><a href="#" class="dl-btn">⬇ Скачать</a></div>
+                <div class="file-row"><div class="f-info"><span class="f-icon">📊</span><span class="f-name">Схема_БД.png</span></div><a href="#" class="dl-btn">⬇ Скачать</a></div>
+            </div>
+        </div>
+
+        <!-- 7 -->
+        <div class="card">
+            <div class="card-top">
+                <div>
+                    <div class="avatar" style="background:#fee2e2; color:#dc2626;">ИЛ</div>
+                    <span class="badge" style="background:#fef2f2; color:#dc2626;">Arduino</span>
+                </div>
+            </div>
+            <div class="proj-title">Робот-манипулятор на Arduino</div>
+            <div class="student-name">Лебедев Иван Петрович</div>
+            <div class="files-title">Файлы проекта</div>
+            <div class="files-list">
+                <div class="file-row"><div class="f-info"><span class="f-icon">📕</span><span class="f-name">Презентация.pptx</span></div><a href="#" class="dl-btn">⬇ Скачать</a></div>
+                <div class="file-row"><div class="f-info"><span class="f-icon">📦</span><span class="f-name">firmware.zip</span></div><a href="#" class="dl-btn">⬇ Скачать</a></div>
+                <div class="file-row"><div class="f-info"><span class="f-icon">🧊</span><span class="f-name">Чертеж_деталей.stl</span></div><a href="#" class="dl-btn">⬇ Скачать</a></div>
+            </div>
+        </div>
+
+        <!-- 8 -->
+        <div class="card">
+            <div class="card-top">
+                <div>
+                    <div class="avatar" style="background:#fef3c7; color:#b45309;">ЕН</div>
+                    <span class="badge" style="background:#fffbeb; color:#b45309;">IoT</span>
+                </div>
+            </div>
+            <div class="proj-title">Система умного освещения</div>
+            <div class="student-name">Новиков Егор Павлович</div>
+            <div class="files-title">Файлы проекта</div>
+            <div class="files-list">
+                <div class="file-row"><div class="f-info"><span class="f-icon">📕</span><span class="f-name">Презентация.pptx</span></div><a href="#" class="dl-btn">⬇ Скачать</a></div>
+                <div class="file-row"><div class="f-info"><span class="f-icon">📦</span><span class="f-name">smart_light.ino</span></div><a href="#" class="dl-btn">⬇ Скачать</a></div>
+                <div class="file-row"><div class="f-info"><span class="f-icon">📘</span><span class="f-name">Схема_подключения.pdf</span></div><a href="#" class="dl-btn">⬇ Скачать</a></div>
+            </div>
+        </div>
+
+        <!-- 9 ⭐ FEATURED -->
+        <div class="card featured">
+            <div class="star-badge">⭐ ЛУЧШИЙ</div>
+            <div class="card-top">
+                <div>
+                    <div class="avatar" style="background:#e0f2fe; color:#0284c7;">ДС</div>
+                    <span class="badge" style="background:#f0f9ff; color:#0284c7;">Telegram Bot</span>
+                </div>
+            </div>
+            <div class="proj-title">Бот школьного расписания</div>
+            <div class="student-name">Соколова Дарья Андреевна</div>
+            <div class="files-title">Файлы проекта</div>
+            <div class="files-list">
+                <div class="file-row"><div class="f-info"><span class="f-icon">📕</span><span class="f-name">Демо_бота.mp4</span></div><a href="#" class="dl-btn">⬇ Скачать</a></div>
+                <div class="file-row"><div class="f-info"><span class="f-icon">🐍</span><span class="f-name">bot_schedule.py</span></div><a href="#" class="dl-btn">⬇ Скачать</a></div>
+                <div class="file-row"><div class="f-info"><span class="f-icon">📘</span><span class="f-name">Руководство.docx</span></div><a href="#" class="dl-btn">⬇ Скачать</a></div>
+            </div>
+        </div>
+
+        <!-- 10 -->
+        <div class="card">
+            <div class="card-top">
+                <div>
+                    <div class="avatar" style="background:#dcfce7; color:#15803d;">РП</div>
+                    <span class="badge" style="background:#f0fdf4; color:#15803d;">Алгоритмы</span>
+                </div>
+            </div>
+            <div class="proj-title">Визуализация сортировок</div>
+            <div class="student-name">Петров Роман Игоревич</div>
+            <div class="files-title">Файлы проекта</div>
+            <div class="files-list">
+                <div class="file-row"><div class="f-info"><span class="f-icon">📕</span><span class="f-name">Защита.pptx</span></div><a href="#" class="dl-btn">⬇ Скачать</a></div>
+                <div class="file-row"><div class="f-info"><span class="f-icon">📦</span><span class="f-name">sort_visualizer.zip</span></div><a href="#" class="dl-btn">⬇ Скачать</a></div>
+                <div class="file-row"><div class="f-info"><span class="f-icon">📘</span><span class="f-name">Анализ_сложности.pdf</span></div><a href="#" class="dl-btn">⬇ Скачать</a></div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>
+
