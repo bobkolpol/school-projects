@@ -6,36 +6,162 @@
     <title>Портал проектов | ГБОУ «РЦШО «Завидово»</title>
     <link href="https://cdn.jsdelivr.net/npm/@fontsource/inter@5.0.16/400,600,700,800.css" rel="stylesheet">
     <style>
-        :root { --bg:#f8fafc; --primary:#1d4ed8; --card:#fff; --text:#0f172a; --muted:#64748b; --border:#e2e8f0; --radius:14px; --shadow:0 2px 8px rgba(0,0,0,0.05); }
-        * { margin:0; padding:0; box-sizing:border-box; }
-        body { font-family:'Inter',system-ui,sans-serif; background:var(--bg); color:var(--text); line-height:1.5; padding:0 0 4rem; }
-        header { background:var(--primary); color:#fff; padding:3rem 1.5rem; text-align:center; border-radius:0 0 32px 32px; margin-bottom:2.5rem; }
-        header h1 { font-size:2rem; font-weight:800; margin-bottom:0.4rem; } header p { opacity:0.9; }
-        .container { max-width:1000px; margin:0 auto; padding:0 1.2rem; }
-        .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:1.2rem; }
-        .card { background:var(--card); padding:1.5rem; border-radius:var(--radius); box-shadow:var(--shadow); text-align:center; text-decoration:none; color:inherit; border:1px solid var(--border); transition:transform 0.2s, box-shadow 0.2s; }
-        .card:hover { transform:translateY(-4px); box-shadow:0 8px 20px rgba(0,0,0,0.1); }
-        .card .icon { font-size:2.5rem; margin-bottom:0.8rem; display:block; }
-        .card .name { font-weight:700; font-size:1.1rem; }
-        @media(max-width:600px){ .grid{grid-template-columns:1fr 1fr;} header h1{font-size:1.6rem;} }
+        /* --- ФИРМЕННАЯ ПАЛИТРА --- */
+        :root {
+            --c-blue: #195082;      /* RGB: 25/80/130 - Твой синий */
+            --c-red: #DC5A41;       /* RGB: 220/90/65  - Твой оранжевый/красный */
+            --c-yellow: #CDAA3C;    /* RGB: 205/170/60 - Твой золотой */
+            --c-green: #007D5A;     /* RGB: 0/125/90   - Твой зелёный */
+            
+            --bg-body: #f8fafc;     /* Светлый фон */
+            --card-bg: #ffffff;     /* Белый фон карточек */
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --radius: 16px;
+            --shadow: 0 4px 12px rgba(25, 80, 130, 0.06);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.5;
+            padding-bottom: 4rem;
+        }
+
+        /* --- ШАПКА (ФИРМЕННЫЙ СИНИЙ) --- */
+        header {
+            background-color: var(--c-blue);
+            color: #ffffff;
+            padding: 3rem 1.5rem;
+            text-align: center;
+            border-radius: 0 0 32px 32px;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 4px 16px rgba(25, 80, 130, 0.2);
+        }
+        header h1 { font-size: 2rem; font-weight: 800; margin-bottom: 0.4rem; letter-spacing: -0.5px; }
+        header p { opacity: 0.9; font-size: 1rem; font-weight: 400; }
+
+        /* --- СЕТКА --- */
+        .container { max-width: 1000px; margin: 0 auto; padding: 0 1.5rem; }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1.2rem;
+        }
+
+        /* --- КАРТОЧКИ --- */
+        .card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 2rem 1.5rem;
+            box-shadow: var(--shadow);
+            border: 1px solid #e2e8f0;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            transition: all 0.25s ease;
+            position: relative;
+            overflow: hidden;
+            border-top: 4px solid transparent; /* Цветная полоска сверху */
+        }
+
+        /* Цвета для разных карточек (чередование твоей палитры) */
+        .card:nth-child(4n+1) { border-top-color: var(--c-red); }
+        .card:nth-child(4n+2) { border-top-color: var(--c-yellow); }
+        .card:nth-child(4n+3) { border-top-color: var(--c-green); }
+        .card:nth-child(4n)   { border-top-color: var(--c-blue); }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(25, 80, 130, 0.12);
+        }
+        .card:hover .icon { transform: scale(1.15); }
+
+        .icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .name {
+            font-weight: 700;
+            font-size: 1.05rem;
+            color: var(--text-main);
+        }
+
+        /* Мобильная адаптация */
+        @media (max-width: 600px) {
+            header h1 { font-size: 1.6rem; }
+            .grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+            .card { padding: 1.5rem 1rem; }
+            .icon { font-size: 2rem; }
+        }
     </style>
 </head>
 <body>
+
 <header>
     <h1>📚 Портал ученических проектов</h1>
-    <p>Выберите предмет для просмотра работ</p>
+    <p>Архив итоговых работ учеников ГБОУ «РЦШО «Завидово»</p>
 </header>
+
 <div class="container">
     <div class="grid">
-        <a href="informatics.html" class="card"><span class="icon">💻</span><span class="name">Информатика</span></a>
-        <a href="biology.html" class="card"><span class="icon">🌿</span><span class="name">Биология</span></a>
-        <a href="russian.html" class="card"><span class="icon">📝</span><span class="name">Русский язык</span></a>
-        <a href="literature.html" class="card"><span class="icon">📖</span><span class="name">Литература</span></a>
-        <a href="chemistry.html" class="card"><span class="icon">🧪</span><span class="name">Химия</span></a>
-        <a href="history.html" class="card"><span class="icon">🏛️</span><span class="name">История</span></a>
-        <a href="social.html" class="card"><span class="icon">⚖️</span><span class="name">Обществознание</span></a>
-        <a href="english.html" class="card"><span class="icon">🇬🇧</span><span class="name">Английский язык</span></a>
+        <!-- Информатика (Синий) -->
+        <a href="informatics.html" class="card">
+            <span class="icon">💻</span>
+            <span class="name">Информатика</span>
+        </a>
+        
+        <!-- Биология (Зелёный) -->
+        <a href="biology.html" class="card">
+            <span class="icon">🌿</span>
+            <span class="name">Биология</span>
+        </a>
+
+        <!-- Русский язык (Красный) -->
+        <a href="russian.html" class="card">
+            <span class="icon">📝</span>
+            <span class="name">Русский язык</span>
+        </a>
+
+        <!-- Литература (Жёлтый) -->
+        <a href="literature.html" class="card">
+            <span class="icon">📖</span>
+            <span class="name">Литература</span>
+        </a>
+
+        <!-- Химия (Зелёный/Синий) -->
+        <a href="chemistry.html" class="card">
+            <span class="icon">🧪</span>
+            <span class="name">Химия</span>
+        </a>
+
+        <!-- История (Синий) -->
+        <a href="history.html" class="card">
+            <span class="icon">🏛️</span>
+            <span class="name">История</span>
+        </a>
+
+        <!-- Обществознание (Красный) -->
+        <a href="social.html" class="card">
+            <span class="icon">⚖️</span>
+            <span class="name">Обществознание</span>
+        </a>
+
+        <!-- Английский (Жёлтый/Синий) -->
+        <a href="english.html" class="card">
+            <span class="icon">🇬🇧</span>
+            <span class="name">Английский язык</span>
+        </a>
     </div>
 </div>
+
 </body>
 </html>
+
