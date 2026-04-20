@@ -6,15 +6,15 @@
     <title>Портал проектов | ГБОУ «РЦШО «Завидово»</title>
     <link href="https://cdn.jsdelivr.net/npm/@fontsource/inter@5.0.16/400,600,700,800.css" rel="stylesheet">
     <style>
-        /* --- ФИРМЕННАЯ ПАЛИТРА --- */
+        /* --- ЦВЕТА --- */
         :root {
-            --c-blue: #195082;      /* RGB: 25/80/130 - Твой синий */
-            --c-red: #DC5A41;       /* RGB: 220/90/65  - Твой оранжевый/красный */
-            --c-yellow: #CDAA3C;    /* RGB: 205/170/60 - Твой золотой */
-            --c-green: #007D5A;     /* RGB: 0/125/90   - Твой зелёный */
+            --c-blue: #195082;      
+            --c-red: #DC5A41;       
+            --c-yellow: #CDAA3C;    
+            --c-green: #007D5A;     
             
-            --bg-body: #f8fafc;     /* Светлый фон */
-            --card-bg: #ffffff;     /* Белый фон карточек */
+            --bg-body: #f8fafc;     
+            --card-bg: #ffffff;     
             --text-main: #1e293b;
             --text-muted: #64748b;
             --radius: 16px;
@@ -30,7 +30,7 @@
             padding-bottom: 4rem;
         }
 
-        /* --- ШАПКА (ФИРМЕННЫЙ СИНИЙ) --- */
+        /* --- ШАПКА  --- */
         header {
             background-color: var(--c-blue);
             color: #ffffff;
@@ -70,7 +70,7 @@
             border-top: 4px solid transparent; /* Цветная полоска сверху */
         }
 
-        /* Цвета для разных карточек (чередование твоей палитры) */
+        
         .card:nth-child(4n+1) { border-top-color: var(--c-red); }
         .card:nth-child(4n+2) { border-top-color: var(--c-yellow); }
         .card:nth-child(4n+3) { border-top-color: var(--c-green); }
@@ -94,7 +94,7 @@
             color: var(--text-main);
         }
 
-        /* Мобильная адаптация */
+        /* МОБИЛКА */
         @media (max-width: 600px) {
             header h1 { font-size: 1.6rem; }
             .grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
